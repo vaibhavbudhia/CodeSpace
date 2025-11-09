@@ -515,7 +515,7 @@ i {
   background-image: url(https://images.unsplash.com/photo-1505577058444-a3dab90d4253?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1870&q=80);
   background-size: cover;
   background-position: center;
-  border: 1vw solid #a0d2eb96;
+  border: 0.3vw solid #a0d2eb96;
   z-index: 2;
 }
 
@@ -528,7 +528,7 @@ i {
   background-position: center;
   background-size: cover;
   z-index: 99;
-  border: 1vw solid #a0d2eb96;
+  border: 0.2vw solid #a0d2eb96;
   border-radius: 50px;
   position: absolute;
 }
@@ -537,7 +537,7 @@ i {
   /* position: relative; */
   width: 7vw;
   height: 100vh;
-  background-color: #fff0e4;
+  background-color: #a0d2eb96;
 }
 
 #circle {
@@ -612,7 +612,7 @@ i {
 }
 
 #line-effect-3 .line {
-  background-color: rgb(255, 240, 228);
+  background-color: rgb(220, 232, 255);
 }
 
 .upar-menu {
