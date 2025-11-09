@@ -368,7 +368,8 @@ body {
 
 #rght-nav a {
   font-family: "Bellefair";
-  color: #666666;
+  color: #1E1E1E;
+  font-weight: bold;
 }
 #rght-nav button {
   font-family: "Bellefair";
@@ -379,7 +380,7 @@ body {
   backdrop-filter: blur(7px);
 }
 #rght-nav button:hover {
-  background-color: #fff;
+  border-color: #ffffff;
 }
 
 #rght-nav a:hover {
@@ -449,7 +450,7 @@ i {
 .img-one {
   width: 100%;
   height: 100%;
-  background-image: url(/Images/option3.png);
+  background-image: url(/Images/option3_magic.png);
   background-size: cover;
   background-position: center;
 }
