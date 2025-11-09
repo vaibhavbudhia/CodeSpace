@@ -339,10 +339,12 @@ body {
 }
 
 .logo {
-  width: 15vw;
-  height: 4vh;
-  left: 100vw;
-  top: 3vh;
+  width: 5vw;
+  height: 12vh;
+  left: 20vw;
+  margin: 1.5vw 0vw 0vw 11vw;
+  padding-left: 15vw;
+  top: 12vh;
   background-image: url(/Images/logo-removebg-preview.png);
   background-size: cover;
   background-position: center;
@@ -505,8 +507,8 @@ i {
 
 .mandit {
   position: absolute;
-  margin-top: 10vw;
-  margin-left: 9.5vw;
+  margin-top: 8vw;
+  margin-left: 12vw;
   width: 12vw;
   height: 22vh;
   border-radius: 50% 50% 50% 50%;
@@ -518,15 +520,16 @@ i {
 }
 
 .mandit-2 {
-  margin-top: 60vh;
-  margin-left: 20vh;
-  width: 25vw;
-  height: 30vh;
+  margin-top: 65vh;
+  margin-left: 40vh;
+  width: 20vw;
+  height: 20vh;
   background-image: url(Images/istockphoto-1397013091-612x612.jpg);
   background-position: center;
   background-size: cover;
   z-index: 99;
   border: 1vw solid #a0d2eb96;
+  border-radius: 50px;
   position: absolute;
 }
 
