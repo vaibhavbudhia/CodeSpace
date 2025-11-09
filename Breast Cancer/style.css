@@ -42,6 +42,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  cursor: none;
 }
 
 #main {
@@ -105,6 +106,17 @@ body {
   border-radius: 4px;
   animation: load 3s;
 }
+
+
+#cursorImage {
+  position: fixed;
+  width: 40px; /* change size */
+  height: 40px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 999999999;
+}
+
 
 @keyframes load {
   0% {
