@@ -6,6 +6,14 @@ $(document).ready(function () {
   $scramble.scramble(3000, 20, "alphabet", true);
 });
 
+
+const cursorImg = document.getElementById("cursorImage");
+
+document.addEventListener("mousemove", (e) => {
+  cursorImg.style.left = e.pageX + "px";
+  cursorImg.style.top = e.pageY + "px";
+});
+
 // ----------scrambleEnd--------------
 
 var tl = gsap.timeline();

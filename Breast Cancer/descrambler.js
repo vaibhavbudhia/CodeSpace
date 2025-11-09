@@ -19,6 +19,13 @@
         interval = 20;
       }
   
+
+      const cursorImg = document.getElementById("cursorImage");
+
+document.addEventListener("mousemove", (e) => {
+  cursorImg.style.left = e.pageX + "px";
+  cursorImg.style.top = e.pageY + "px";
+});
       // charsets: pre-defined character sets to use for descrambling characters.
         // Default: charsets.all.
       var charsets = {
