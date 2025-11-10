@@ -5,13 +5,12 @@ $(document).ready(function () {
 
   $scramble.scramble(3000, 20, "alphabet", true);
 });
-const cursor = document.querySelector(".cursorImage");
+const cursorImg = document.getElementById("cursorImage");
 
 document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.pageX + "px";
-  cursor.style.top = e.pageY + "px";
+  cursorImg.style.left = e.pageX + "px";
+  cursorImg.style.top = e.pageY + "px";
 });
-
 // ----------scrambleEnd--------------
 
 var tl = gsap.timeline();
