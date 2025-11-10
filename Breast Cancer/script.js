@@ -5,13 +5,11 @@ $(document).ready(function () {
 
   $scramble.scramble(3000, 20, "alphabet", true);
 });
-
-
-const cursorImg = document.getElementById("cursorImage");
+const cursor = document.querySelector(".cursorImage");
 
 document.addEventListener("mousemove", (e) => {
-  cursorImg.style.left = e.pageX + "px";
-  cursorImg.style.top = e.pageY + "px";
+  cursor.style.left = e.pageX + "px";
+  cursor.style.top = e.pageY + "px";
 });
 
 // ----------scrambleEnd--------------
