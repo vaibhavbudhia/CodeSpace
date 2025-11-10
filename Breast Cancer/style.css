@@ -358,8 +358,9 @@ body {
   padding-left: 15vw;
   top: 12vh;
   background-image: url(/Images/logo-removebg-preview.png);
-  background-size: cover;
+  background-size: 15vw 15vh;
   background-position: center;
+  background-color: white;
   z-index: 10;
 }
 
@@ -380,7 +381,7 @@ body {
 
 #rght-nav a {
   font-family: "Bellefair";
-  color: #1E1E1E;
+  color: #ffffff;
   font-weight: bold;
 }
 #rght-nav button {
@@ -392,6 +393,7 @@ body {
   backdrop-filter: blur(7px);
   font-size: 16px;
   font-weight: bold;
+  color: white;
 }
 #rght-nav button:hover {
   border-color: #ffffff;
@@ -456,7 +458,7 @@ i {
 
 .main-abhishek > .diver > .img-div {
   position: absolute;
-  width: 70vw;
+  width: 100vw;
   height: 100vh;
   right: 0;
 }
@@ -467,6 +469,7 @@ i {
   background-image:url(Images/mandit2.png) ;
   background-size: cover;
   background-position: center;
+  
 }
 
 .swiper {
@@ -552,7 +555,7 @@ i {
   /* position: relative; */
   width: 7vw;
   height: 100vh;
-  background-color: #a0d2eb96;
+  background-color: #ffffff;
 }
 
 #circle {
@@ -612,12 +615,12 @@ i {
   background-color: rgba(255, 255, 255, 0.476);
 }
 
-#line-effect-2 {
+/* #line-effect-2 {
   left: 23%;
   height: 10vh;
   top: 90vh;
   z-index: 999;
-}
+} */
 
 #line-effect-3 {
   left: 3.4%;
