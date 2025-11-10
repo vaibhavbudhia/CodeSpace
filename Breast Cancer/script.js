@@ -773,3 +773,31 @@ ScrollTrigger.create({
 }
 
 dom()
+//upload files button:
+const fileUpload = document.getElementById("fileUpload");
+const preview = document.getElementById("preview");
+const status = document.getElementById("status");
+const uploadBox = document.querySelector(".upload-box");
+
+uploadBox.addEventListener("click", () => fileUpload.click());
+
+
+fileUpload.addEventListener("change", handleFile);
+
+function handleFile() {
+  const file = fileUpload.files[0];
+  if (!file) return;
+
+  preview.innerHTML = "";
+  status.textContent = "Classifying...";
+
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  preview.appendChild(img);
+
+  setTimeout(() => {
+    const infected = Math.random() < 0.5;
+    status.textContent = infected ? "The cell is Infected." : "The cell is Uninfected.";
+    status.style.color = infected ? "#ff4747" : "#48ff48";
+  }, 1500);
+}

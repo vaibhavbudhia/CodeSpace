@@ -499,7 +499,7 @@ i {
   flex-direction: column;
   padding-left: 21vw;
   position: absolute;
-  top: 20%;
+  top: 30%;
   transform: translate(30%, -35%);
   width: 55vw;
   height: 30vh;
@@ -507,9 +507,10 @@ i {
 }
 
 .main-abhishek .diver .main-txt-front h1 {
-  font-size: 8vw;
+  font-size: 10vw;
   font-family: Capital;
-  letter-spacing: 0.4vw;
+  line-height: 1.2;
+  letter-spacing: 0.8vw;
   color: #ffffff;
 }
 
@@ -527,7 +528,7 @@ i {
 }
 .upload-section {
   top: 75%;
-  position: absolute;
+  position: fixed;
   background-color: transparent;
   font-family: Arial, sans-serif;
   color: white;
@@ -536,7 +537,7 @@ i {
   justify-content: center;
   transform: translate(30%,-35%);
   /* min-height: 100vh; */
-  margin: 0 0 0 40%;
+  margin: 0 0 0 38%;
 z-index: 9999;
 }
 
@@ -626,6 +627,7 @@ h1 {
 
 .front-page-img {
   /* position: relative; */
+  display: contents;
   width: 7vw;
   height: 100vh;
   background-color: #ffffff;
