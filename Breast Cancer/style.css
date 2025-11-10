@@ -354,13 +354,13 @@ body {
   width: 5vw;
   height: 12vh;
   left: 20vw;
-  margin: 1.5vw 0vw 0vw 11vw;
+  margin: 1.5vw 0vw 0vw 0vw;
   padding-left: 15vw;
-  top: 12vh;
+  top: 20vh;
   background-image: url(/Images/logo-removebg-preview.png);
   background-size: 15vw 15vh;
   background-position: center;
-  background-color: white;
+  /* background-color: white; */
   z-index: 10;
 }
 
@@ -412,7 +412,7 @@ body {
   width: 30%;
   height: 50%;
   background-color: #fff;
-  border: 1px solid #333;
+  /* border: 1px solid #333; */
   border-spacing: 5px;
   z-index: 99999;
 }
@@ -497,20 +497,21 @@ i {
   display: flex;
   align-items: left;
   flex-direction: column;
-  padding-left: 16.3vw;
+  padding-left: 21vw;
   position: absolute;
-  top: 38%;
-  transform: translate(15%, -50%);
-  width: 70vw;
-  height: 50vh;
+  top: 30%;
+  transform: translate(30%, -35%);
+  width: 55vw;
+  height: 30vh;
   z-index: 2;
 }
 
 .main-abhishek .diver .main-txt-front h1 {
-  font-size: 6vw;
+  font-size: 10vw;
   font-family: Capital;
-  letter-spacing: 0.4vw;
-  color: #64ccbc;
+  line-height: 1.2;
+  letter-spacing: 0.8vw;
+  color: #ffffff;
 }
 
 .main-abhishek .diver .main-txt-front h1 span {
@@ -519,16 +520,89 @@ i {
 }
 
 .main-txt-front p {
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   font-family: Bellefair;
+  color: rgb(0, 0, 0);
+  background-color: white;
+  border-radius: 20px;
 }
+.upload-section {
+  top: 75%;
+  position: fixed;
+  background-color: transparent;
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(30%,-35%);
+  /* min-height: 100vh; */
+  margin: 0 0 0 38%;
+z-index: 9999;
+}
+
+.container {
+  text-align: center;
+  max-width: 700px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* .upload-section {
+  margin-top: 20px;
+} */
+
+.upload-box {
+  border: 2px dashed #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+}
+
+.upload-box p {
+  margin: 0;
+  font-size: 20px;
+  opacity: .8;
+}
+
+.upload-box span {
+  font-size: 12px;
+  opacity: .6;
+}
+
+.browse-btn {
+  margin-top: 15px;
+  background: transparent;
+  border: 1px solid #fff;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+#preview img {
+  margin-top: 25px;
+  max-width: 60%;
+  border-radius: 10px;
+}
+
+#status {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 
 .mandit {
   position: absolute;
-  margin-top: 8vw;
-  margin-left: 12vw;
+  margin-top: 20vw;
+  margin-left: 10vw;
   width: 12vw;
-  height: 22vh;
+  height: 30vh;
   border-radius: 50% 50% 50% 50%;
   background-image: url(Images/istockphoto-1267859502-612x612.jpg);
   background-size: cover;
@@ -553,6 +627,7 @@ i {
 
 .front-page-img {
   /* position: relative; */
+  display: contents;
   width: 7vw;
   height: 100vh;
   background-color: #ffffff;
