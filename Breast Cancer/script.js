@@ -800,4 +800,23 @@ function handleFile() {
   }, 1500);
 }
 
-// <<----------------BLOG----------------->>
+//ASYNC CALLING OF FILE UPLOADING BACKEND
+
+document.getElementById("uploadBtn").addEventListener("click", async () => {
+  const file = document.getElementById("fileUpload").files[0];
+  if (!file) {
+    alert("Please select a file first");
+    return;
+  }
+
+  document.getElementById("status").innerText = "Starting upload...";
+  try {
+    const downloadURL = await uploadFile(file);
+    document.getElementById("status").innerHTML = `
+      ✅ Uploaded successfully!<br>
+      <a href="${downloadURL}" target="_blank">View file</a>
+    `;
+  } catch (err) {
+    document.getElementById("status").innerText = "Upload failed: " + err.message;
+  }
+});
