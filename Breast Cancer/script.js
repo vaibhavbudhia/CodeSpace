@@ -9,9 +9,12 @@ const cursorImg = document.getElementById("cursorImage");
 
 document.addEventListener("mousemove", (e) => {
   cursorImg.style.left = e.pageX + "px";
+<<<<<<< HEAD
+  cursorImg.style.top = e.pageY + "px";
+=======
   cursorImg.style.top = e.pageY + "px";
+>>>>>>> f28ce5c553076092731b09f27738b46c8224782c
 });
-
 // ----------scrambleEnd--------------
 
 var tl = gsap.timeline();
