@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breast Cancer Biopsy Report</title>
+  <link rel="stylesheet" href="biopsy.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🩺 Breast Cancer Biopsy Analysis</h1>
+    <p class="subtitle">Upload a biopsy image to generate diagnostic report</p>
+
+    <div id="drop-area">
+      <p>Drag & Drop image here or <span id="browse-btn">browse</span></p>
+      <input type="file" id="fileElem" accept="image/*" hidden />
+    </div>
+
+    <div id="preview"></div>
+
+    <div id="report-section" class="hidden">
+      <h2>Diagnostic Report</h2>
+      <div id="report-card">
+        <div class="report-row"><strong>Patient ID:</strong> <span id="r-patient"></span></div>
+        <div class="report-row"><strong>Image Name:</strong> <span id="r-file"></span></div>
+        <div class="report-row"><strong>Diagnosis:</strong> <span id="r-diagnosis"></span></div>
+        <div class="report-row"><strong>Confidence:</strong> <span id="r-confidence"></span></div>
+        <div class="report-row"><strong>Analysis Date:</strong> <span id="r-date"></span></div>
+        <div class="report-row note">
+          <strong>Doctor’s Note:</strong>
+          <p id="r-note"></p>
+        </div>
+      </div>
+
+      <button id="download-btn">Download Report (PDF)</button>
+    </div>
+  </div>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="biopsy.js"></script>
+</body>
+</html>
