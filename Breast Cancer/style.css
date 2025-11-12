@@ -381,7 +381,7 @@ body {
 
 #rght-nav a {
   font-family: "Bellefair";
-  color: #ffffff;
+  color: #01574d;
   font-weight: bold;
 }
 #rght-nav button {
@@ -389,11 +389,11 @@ body {
   border-radius: 1vw;
   padding: 0.7vw;
   background-color: transparent;
-  border: 3px solid rgba(122, 184, 255, 0.479);
+  border: 3px solid rgb(247, 112, 134);
   backdrop-filter: blur(7px);
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  color: #01574d;
 }
 #rght-nav button:hover {
   border-color: #ffffff;
