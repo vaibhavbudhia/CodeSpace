@@ -5,12 +5,12 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background: #d383bf;
+  background: linear-gradient(120deg, #f093fb, #f5576c);
   color: #333;
 }
 
 .container {
-  background: #faf3f3;
+  background: #fff;
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
@@ -52,7 +52,7 @@ h1 {
   width: 100%;
   border-radius: 10px;
   margin-top: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .hidden {
@@ -89,4 +89,20 @@ h1 {
 
 .safe {
   color: green !important;
+}
+
+button {
+  background: #e53935;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #b71c1c;
 }

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Breast Cancer Biopsy Report</title>
-  <link rel="stylesheet" href="biopsy.css">
+  <link rel="stylesheet" href="biopsy.css" />
 </head>
 <body>
   <div class="container">
     <h1>🩺 Breast Cancer Biopsy Analysis</h1>
-    <p class="subtitle">Upload biopsy slide image to generate diagnostic report</p>
+    <p class="subtitle">Upload a biopsy image to generate diagnostic report</p>
 
     <div id="drop-area">
-      <p>Drag & Drop a biopsy image here or <span id="browse-btn">browse</span></p>
-      <input type="file" id="fileElem" accept="image/*" hidden>
+      <p>Drag & Drop image here or <span id="browse-btn">browse</span></p>
+      <input type="file" id="fileElem" accept="image/*" hidden />
     </div>
 
     <div id="preview"></div>
@@ -31,9 +31,13 @@
           <p id="r-note"></p>
         </div>
       </div>
+
+      <button id="download-btn">Download Report (PDF)</button>
     </div>
   </div>
 
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="biopsy.js"></script>
 </body>
 </html>
