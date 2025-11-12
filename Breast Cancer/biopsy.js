@@ -1,5 +1,5 @@
 const dropArea = document.getElementById("drop-area");
-const fileInput = document.getElementById("fileElem");
+const fileInput = document.getElementById("fileUpload");
 const browseBtn = document.getElementById("browse-btn");
 const preview = document.getElementById("preview");
 const reportSection = document.getElementById("report-section");
