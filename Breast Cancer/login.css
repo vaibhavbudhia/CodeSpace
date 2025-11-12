@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(/Images/bg.jpg) no-repeat;
+    background: url(Images/background.png) no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -19,9 +19,9 @@ body {
 .login-container {
     width: 380px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(9px);
-    margin-right: 50%;
+    border: 2px solid #33333396;
+    backdrop-filter: blur(50px);
+    margin-right: 45%;
     color: white;
     border-radius: 14px;
     padding: 30px 40px;
@@ -44,16 +44,16 @@ body {
 .social-icons .icon {
     display: inline-block;
     font-size: 20px;
-    color: white;
+    color: black;
     margin: 0 10px;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, .8);
     border-radius: 16px;
     padding: 7px 10px;
     transition: color 0.3s ease;
 }
 
 .social-icons .icon:hover {
-    color: #c2c2c2;
+    color: #01574d;
 }
 
 
@@ -84,7 +84,7 @@ button {
     height: 50px;
     margin: 10px 0;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgb(249, 249, 249);
     border-radius: 60px;
     font-size: 15px;
     color: white;
@@ -92,7 +92,7 @@ button {
 }
 
 input::placeholder {
-    color: white;
+    color: #01574d;
     text-indent: 15px;
 }
 
@@ -102,7 +102,7 @@ button:focus {
 }
 
 button {
-    background-color: #02a152;
+    background-color: #a10242;
     color: white;
     border: none;
     cursor: pointer;
@@ -110,7 +110,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #cb0353;
 }
 
 /* Anchor tag styles */
