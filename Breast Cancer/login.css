@@ -3,7 +3,7 @@
     font-family: "Outfit", sans-serif;
 }
 
-body {
+body.login-page{
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,13 +17,15 @@ body {
 
 /* Container styles */
 .login-container {
-    width: 380px;
+   width: 380px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(9px);
-    color: white;
+    border: 2px solid white;
+    backdrop-filter: blur(50px);
+    margin-right: 45%;
+    color: #02c0aa;
     border-radius: 14px;
     padding: 30px 40px;
+    
 }
 
 /* Heading styles */
