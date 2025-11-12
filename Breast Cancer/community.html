@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Breast Cancer Trials — Blog + Doctor Community</title>
+  <style>
+    /* Theme — soft light pink palette */
+    :root{
+      --bg:#fff6f9;
+      --card:#fff;
+      --accent:#ffb6d5; /* light pink */
+      --muted:#9b6a7a;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 8px 24px rgba(155,86,108,0.08);
+      --radius:16px;
+      --max-width:1100px;
+      --smooth: cubic-bezier(.2,.9,.2,1);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#3b2b33}
+    /* Page layout */
+    .wrap{max-width:var(--max-width);margin:36px auto;padding:24px;display:grid;gap:20px}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .dot{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#ffdbe8);box-shadow:0 6px 18px rgba(255,120,170,0.12);display:flex;align-items:center;justify-content:center;font-weight:700}
+    h1{margin:0;font-size:20px}
+    .nav-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .btn{background:var(--accent);border:none;padding:10px 14px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow);font-weight:600;transition:transform .18s var(--smooth)}
+    .btn:active{transform:translateY(2px)}
+
+    /* Top insights bar */
+    .insights{background:linear-gradient(180deg, rgba(255,182,213,0.18), rgba(255,229,237,0.6));padding:16px;border-radius:12px;display:flex;gap:12px;align-items:center}
+    .insights .text{font-size:14px;color:var(--muted)}
+
+    /* Main grid */
+    .content{display:grid;grid-template-columns:1fr 360px;gap:20px}
+
+    /* Blog list */
+    .feed{display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start;transform-origin:center;opacity:0;transform:translateY(10px) scale(.995);transition:opacity .45s var(--smooth), transform .45s var(--smooth)}
+    .card.visible{opacity:1;transform:none}
+    .meta{font-size:12px;color:var(--muted)}
+    .card img{width:120px;height:80px;border-radius:10px;object-fit:cover}
+    .card .title{font-weight:700;margin:0}
+    .card .desc{margin:6px 0 0;font-size:14px;color:#553b44}
+
+    /* sticky right panel */
+    .side{position:sticky;top:28px;align-self:start;display:flex;flex-direction:column;gap:14px}
+    .card-small{background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
+
+    /* Doctor community chat */
+    .chat-toggle{position:fixed;right:22px;bottom:22px;z-index:1000}
+    .chat-window{position:fixed;right:22px;bottom:86px;width:360px;background:linear-gradient(180deg,#fff,#fff6fb);border-radius:16px;box-shadow:0 28px 60px rgba(150,70,120,0.12);overflow:hidden;height:520px;display:flex;flex-direction:column}
+    .chat-header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,0.05)}
+    .chat-messages{flex:1;padding:12px;overflow:auto;display:flex;flex-direction:column;gap:10px}
+    .msg{max-width:78%;padding:10px 12px;border-radius:12px;background:var(--glass);backdrop-filter: blur(6px);font-size:13px}
+    .msg.me{margin-left:auto;background:linear-gradient(135deg,var(--accent),#ffdbe8);color:#3b1a2a}
+    .chat-input{display:flex;padding:10px;border-top:1px solid rgba(0,0,0,0.05);gap:8px}
+    .chat-input input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
+
+    /* small helpers */
+    .muted{font-size:13px;color:var(--muted)}
+    .pill{background:rgba(255,182,213,0.18);padding:6px 10px;border-radius:999px;font-weight:600}
+
+    /* loader */
+    .loader{display:flex;align-items:center;justify-content:center;padding:26px}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .content{grid-template-columns:1fr}
+      .side{position:static}
+      .chat-window{right:12px;left:12px;width:auto}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="dot">BC</div>
+        <div>
+          <h1>Breast Cancer Trials — Tracker</h1>
+          <div class="muted">Latest clinical trials and research — Pan-India & Global</div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <button class="btn" id="subscribe">Subscribe</button>
+        <button class="btn" id="open-chat">Doctor Community</button>
+      </div>
+    </header>
+
+    <div class="insights">
+      <div class="pill">Seasonal Notice</div>
+      <div class="text">Currently trending: community awareness drives and new immunotherapy trials. Click any card for details and links to official trial registries.</div>
+    </div>
+
+    <div class="content">
+      <div>
+        <div class="feed" id="feed" aria-live="polite"></div>
+        <div class="loader" id="loader">Loading more trials...</div>
+      </div>
+
+      <aside class="side">
+        <div class="card-small">
+          <strong>Filter</strong>
+          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+            <select id="filter-country" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+              <option value="all">All Regions</option>
+              <option value="india">India</option>
+              <option value="global">Global</option>
+            </select>
+            <select id="filter-status" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+              <option value="all">All Status</option>
+              <option value="recruiting">Recruiting</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-small">
+          <strong>About this feed</strong>
+          <div class="muted" style="margin-top:8px">This is a demo feed that compiles trial headlines and summaries. Connect to a trial registry API and replace `generateTrial()` in the script to fetch live data.</div>
+        </div>
+
+        <div class="card-small">
+          <strong>Quick tips</strong>
+          <ul class="muted" style="margin:8px 0 0;padding-left:18px">
+            <li>Use the filter to narrow region/status.</li>
+            <li>Open "Doctor Community" to discuss trials in real time.</li>
+            <li>Click card to expand and get a copyable summary.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+  <!-- Chat toggle + window -->
+  <div class="chat-toggle">
+    <button class="btn" id="toggle-chat">Open Doctor Community</button>
+  </div>
+
+  <div class="chat-window" id="chat-window" style="display:none">
+    <div class="chat-header">
+      <div style="flex:1">
+        <strong>Doctor Community</strong>
+        <div class="muted" style="font-size:12px">Doctors only — simple realtime chat (works across browser tabs, no backend)</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input id="username" placeholder="Your name (Dr. ...)" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)" />
+        <select id="room" style="padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06)">
+          <option value="oncology">Oncology</option>
+          <option value="trials">Clinical Trials</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+    </div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+      <input id="msg-in" placeholder="Write a message..." />
+      <button class="btn" id="send">Send</button>
+    </div>
+  </div>
+
+  <script>
+    /* ======= Blog infinite scroll (client-side demo) ======= */
+    const feed = document.getElementById('feed');
+    const loader = document.getElementById('loader');
+    let page = 0; const perPage = 6; let loading=false; let end=false;
+
+    // Small sample data seeds to simulate real trial items
+    const sampleTitles = [
+      'Phase II trial of immunotherapy for HER2+ patients',
+      'Pan-India observational study on post-op care',
+      'Global randomized trial: new adjuvant drug X',
+      'Neoadjuvant combo therapy phase III',
+      'Study of targeted therapy in metastatic breast cancer',
+      'Quality-of-life outcomes in survivorship care'
+    ];
+    const sampleDesc = [
+      'Multicenter study to assess safety and efficacy. Enrolling across tertiary hospitals.',
+      'Registry-based analysis of outcomes in low-resource settings.',
+      'Randomized, double-blind trial measuring progression-free survival.',
+      'Comparing standard chemo with novel combination in neoadjuvant setting.',
+      'Biomarker-driven trial targeting specific mutations.',
+      'Patient-reported outcomes across 12 months follow up.'
+    ];
+
+    function generateTrial(i){
+      // For real use: replace with fetch() to clinicaltrials.gov or CTRI
+      const t = sampleTitles[i % sampleTitles.length];
+      const d = sampleDesc[i % sampleDesc.length];
+      const region = (i % 4 === 0) ? 'india' : (i % 3 === 0) ? 'global' : 'india';
+      const status = (i % 5 === 0) ? 'completed' : (i % 2 === 0) ? 'recruiting' : 'active';
+      return {
+        id: 'TR-' + (1000 + i),
+        title: t,
+        desc: d,
+        date: new Date(Date.now() - i*86400000).toLocaleDateString(),
+        image: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='240'><rect width='100%' height='100%' fill='#ffdbe8'/><text x='20' y='40' font-family='Arial' font-size='20' fill='#7a2841'>${t.slice(0,36)}</text></svg>`),
+        region, status
+      }
+    }
+
+    function renderCard(trial){
+      const el = document.createElement('article');
+      el.className='card';
+      el.innerHTML = `
+        <img src="${trial.image}" alt="thumbnail">
+        <div style=flex:1>
+          <div class="meta">${trial.id} • ${trial.date} • <span style='text-transform:capitalize'>${trial.region}</span> • <strong>${trial.status}</strong></div>
+          <h3 class="title">${trial.title}</h3>
+          <p class="desc">${trial.desc}</p>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <button class="btn small" data-id="${trial.id}" onclick="copySummary('${encodeURIComponent(JSON.stringify(trial))}')">Copy Summary</button>
+            <button class="btn small" onclick="openDetail('${trial.id}')">Details</button>
+          </div>
+        </div>`;
+
+      // reveal animation
+      requestAnimationFrame(()=>{ el.classList.add('visible'); });
+      el.dataset.region = trial.region; el.dataset.status = trial.status;
+      return el;
+    }
+
+    function copySummary(encoded){
+      const trial = JSON.parse(decodeURIComponent(encoded));
+      const text = `${trial.title}\n${trial.desc}\nTrial ID: ${trial.id} | Status: ${trial.status} | Region: ${trial.region}`;
+      navigator.clipboard.writeText(text).then(()=>{ alert('Summary copied to clipboard!'); });
+    }
+    function openDetail(id){ alert('Open details for ' + id + '. Replace with modal or link to registry.'); }
+
+    // load function simulating network delay
+    async function loadMore(){
+      if(loading || end) return; loading=true; loader.style.opacity=1;
+      await new Promise(r=>setTimeout(r,500 + Math.random()*600));
+      const items = [];
+      for(let i=0;i<perPage;i++){ let idx = page*perPage + i; if(idx>120){ end=true; break;} items.push(generateTrial(idx)); }
+      if(items.length===0){ loader.textContent='No more trials.'; loader.style.opacity=0.7; loading=false; return; }
+      items.forEach(t=> feed.appendChild(renderCard(t)));
+      page++; loading=false; loader.style.opacity=0.35;
+    }
+
+    // infinite scroll using IntersectionObserver
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(en=>{ if(en.isIntersecting) loadMore(); });
+    },{root:null,rootMargin:'200px',threshold:0.1});
+    obs.observe(loader);
+
+    // filters
+    const filtCountry = document.getElementById('filter-country');
+    const filtStatus = document.getElementById('filter-status');
+    function applyFilters(){
+      const c = filtCountry.value; const s = filtStatus.value;
+      Array.from(feed.children).forEach(card=>{
+        const okC = (c==='all') || (card.dataset.region===c);
+        const okS = (s==='all') || (card.dataset.status===s);
+        card.style.display = (okC && okS) ? '' : 'none';
+      });
+    }
+    filtCountry.addEventListener('change',applyFilters);
+    filtStatus.addEventListener('change',applyFilters);
+
+    // initial load
+    loadMore(); loadMore();
+
+    /* ===== Doctor community chat (no-backend, uses BroadcastChannel to sync across tabs) ===== */
+    const bcName = 'doctor-community-v1';
+    let bc = null;
+    try { bc = new BroadcastChannel(bcName); } catch(e){ bc=null; }
+
+    const chatWindow = document.getElementById('chat-window');
+    const toggleChat = document.getElementById('toggle-chat');
+    const openChatBtn = document.getElementById('open-chat');
+    const sendBtn = document.getElementById('send');
+    const messagesEl = document.getElementById('messages');
+    const msgInput = document.getElementById('msg-in');
+    const username = document.getElementById('username');
+    const roomSelect = document.getElementById('room');
+
+    // restore username from localStorage
+    username.value = localStorage.getItem('bc_username') || '';
+    roomSelect.value = localStorage.getItem('bc_room') || 'oncology';
+
+    function showChat(open=true){ chatWindow.style.display = open ? 'flex' : 'none'; }
+    toggleChat.addEventListener('click', ()=>{ showChat(true); chatWindow.querySelector('#msg-in').focus(); });
+    openChatBtn.addEventListener('click', ()=>{ showChat(true); chatWindow.querySelector('#msg-in').focus(); });
+
+    function sendMessage(){
+      const name = username.value.trim() || 'Anonymous';
+      const room = roomSelect.value;
+      const text = msgInput.value.trim(); if(!text) return;
+      const payload = {id: 'm-'+Date.now()+'-'+Math.floor(Math.random()*99), name, room, text, ts: Date.now()};
+      // persist message locally
+      persistMessage(payload);
+      renderMessage(payload, true);
+      msgInput.value='';
+      // broadcast to other tabs
+      if(bc) bc.postMessage({type:'message',payload});
+    }
+    sendBtn.addEventListener('click', sendMessage);
+    msgInput.addEventListener('keydown', e=>{ if(e.key==='Enter') sendMessage(); });
+
+    function persistMessage(m){
+      const key = 'bc_messages_'+m.room;
+      const arr = JSON.parse(localStorage.getItem(key)||'[]');
+      arr.push(m); if(arr.length>500) arr.shift();
+      localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    function loadMessagesForRoom(room){
+      messagesEl.innerHTML='';
+      const arr = JSON.parse(localStorage.getItem('bc_messages_'+room)||'[]');
+      arr.slice(-200).forEach(m=>renderMessage(m, m.name===username.value));
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function renderMessage(m, local=false){
+      if(m.room !== roomSelect.value) return; // only show current room
+      const d = document.createElement('div'); d.className='msg'+(m.name===username.value? ' me':'');
+      d.innerHTML = `<strong style='display:block;font-size:12px'>${escapeHtml(m.name)} <span style='font-weight:400;font-size:11px;color:#6b4953'>· ${new Date(m.ts).toLocaleTimeString()}</span></strong>${escapeHtml(m.text)}`;
+      messagesEl.appendChild(d);
+      // small entrance animation
+      d.style.opacity=0; d.style.transform='translateY(8px)';
+      requestAnimationFrame(()=>{ d.style.transition='all .24s var(--smooth)'; d.style.opacity=1; d.style.transform='none'; });
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    // receive broadcast messages
+    if(bc){
+      bc.onmessage = (ev)=>{
+        if(ev.data && ev.data.type === 'message'){
+          const m = ev.data.payload;
+          persistMessage(m);
+          // show only if in same room
+          if(m.room === roomSelect.value) renderMessage(m);
+        }
+      }
+    }
+
+    // change room -> reload messages
+    roomSelect.addEventListener('change', ()=>{ localStorage.setItem('bc_room', roomSelect.value); loadMessagesForRoom(roomSelect.value); });
+    username.addEventListener('change', ()=>{ localStorage.setItem('bc_username', username.value); loadMessagesForRoom(roomSelect.value); });
+
+    // initialize
+    loadMessagesForRoom(roomSelect.value);
+
+    // helper to escape HTML
+    function escapeHtml(unsafe){ return unsafe.replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];}); }
+
+    // tiny UX: clicking copy subscribes user
+    document.getElementById('subscribe').addEventListener('click', ()=>{ alert('Subscribed — you will get updates. (Demo)'); });
+
+    // accessibility: small keyboard shortcut to open chat (c)
+    document.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='c' && !e.metaKey && !e.ctrlKey){ showChat(true); username.focus(); } });
+
+    // Expose a function for the copy button
+    window.copySummary = copySummary;
+    window.openDetail = openDetail;
+
+    /* ===== Notes for developer (included in file comments) =====
+      - This is a single-file demo. To hook to real data: replace generateTrial() and loadMore() with fetch calls
+        to CTRI (Clinical Trials Registry - India) or ClinicalTrials.gov and map fields accordingly.
+      - The chat uses BroadcastChannel to sync tabs in the same origin. To make it global across devices you'd
+        need a small WebSocket backend (e.g. Node + socket.io) and store messages in a database.
+      - For production: add authentication, moderation, and rate-limiting for the doctor community.
+    */
+  </script>
+</body>
+</html>
