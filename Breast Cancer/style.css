@@ -508,7 +508,11 @@ i {
 
 .main-abhishek .diver .main-txt-front h1 {
   font-size: 7vw;
+
+  font-family: Capital;
+
   font-family: hotel2;
+
   line-height: 1.2;
   letter-spacing: 0.8vw;
   color: #ffffed;
@@ -531,7 +535,10 @@ i {
   position: absolute;
   background-color: transparent;
   font-family: Arial, sans-serif;
+    color: rgb(255, 255, 255);
+
   color: black;
+
   display: flex;
   align-items: center;
   justify-content: center;
